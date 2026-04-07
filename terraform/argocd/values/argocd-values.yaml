@@ -1,0 +1,23 @@
+server:
+  service:
+    type: ClusterIP
+  extraArgs:
+    - --insecure
+
+configs:
+  rbac:
+    create: true
+    policy.default: role:readonly
+  cm:
+    timeout.reconciliation: 60s
+
+controller:
+  extraArgs:
+    - --app-resync=60
+
+repoServer:
+  extraArgs:
+    - --parallelismlimit=5
+
+redis:
+  enabled: true
