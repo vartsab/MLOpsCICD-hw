@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: infra-tools
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 15.5.38
+    helm:
+      releaseName: postgres
+      values: |
+        image:
+          registry: docker.io
+          repository: bitnami/postgresql
+          tag: latest
+
+        auth:
+          postgresPassword: postgres123
+          username: mlflow
+          password: mlflow123
+          database: mlflow
+
+        primary:
+          persistence:
+            enabled: true
+            size: 1Gi
+
+        service:
+          ports:
+            postgresql: 5432
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: application
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
