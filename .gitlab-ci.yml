@@ -9,4 +9,11 @@ train-model:
   before_script:
     - aws --version
   script:
-    - aws stepfunctions start-execution --region "$AWS_DEFAULT_REGION" --state-machine-arn "$STEP_FUNCTION_ARN" --name "train-${CI_COMMIT_SHORT_SHA}-$(date +%s)" --input "{\"source\":\"gitlab-ci\",\"commit\":\"${CI_COMMIT_SHORT_SHA}\"}"
+    - |
+      INPUT_JSON='{"source":"gitlab-ci","commit":"'"$CI_COMMIT_SHORT_SHA"'"}'
+
+      aws stepfunctions start-execution \
+        --region "$AWS_DEFAULT_REGION" \
+        --state-machine-arn "$STEP_FUNCTION_ARN" \
+        --name "train-${CI_COMMIT_SHORT_SHA}-$(date +%s)" \
+        --input "$INPUT_JSON"
