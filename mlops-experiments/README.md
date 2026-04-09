@@ -15,6 +15,7 @@
 ---
 
 ## Project structure
+```
 mlops-experiments/
 ├── argocd/
 │ ├── application.yaml
@@ -28,18 +29,19 @@ mlops-experiments/
 ├── best_model/
 │ └── best_model.pkl
 └── screenshots/
-
+```
 ---
 
 ##  ArgoCD Applications
-
 ```kubectl get applications -n infra-tools```
 
 ## Check services
-```kubectl get pods -n application```
-```kubectl get svc -n application```
-```kubectl get pods -n monitoring```
-```kubectl get svc -n monitoring```
+```
+kubectl get pods -n application
+kubectl get svc -n application
+kubectl get pods -n monitoring
+kubectl get svc -n monitoring
+```
 
 ---
 
@@ -49,8 +51,10 @@ mlops-experiments/
 ```http://localhost:5000```
 
 ## MinIO
-```kubectl port-forward svc/minio -n application 9000:9000```
-```kubectl port-forward svc/minio -n application 9001:9001```
+```
+kubectl port-forward svc/minio -n application 9000:9000
+kubectl port-forward svc/minio -n application 9001:9001
+```
 ### Open:
 ```http://localhost:9001```
 ### Login:
@@ -64,15 +68,17 @@ mlops-experiments/
 ---
 
 ## Run experiment
-```cd ~/mlops-experiments```
-```source .venv/bin/activate```
+```
+cd ~/MLOpsCICD-hw7/mlops-experiments
+source .venv/bin/activate
 
-```export AWS_ACCESS_KEY_ID=admin```
-```export AWS_SECRET_ACCESS_KEY=admin12345```
-```export AWS_DEFAULT_REGION=us-east-1```
-```export MLFLOW_S3_ENDPOINT_URL=http://localhost:9000```
+export AWS_ACCESS_KEY_ID=admin
+export AWS_SECRET_ACCESS_KEY=admin12345
+export AWS_DEFAULT_REGION=us-east-1
+export MLFLOW_S3_ENDPOINT_URL=http://localhost:9000
 
-```python experiments/train_and_push.py```
+python experiments/train_and_push.py
+```
 
 ---
 
@@ -107,11 +113,3 @@ Fully working MLOps pipeline:
 - GitOps deployment (ArgoCD)
 
 ---
-
-# REQUIREMENTS.TXT
-
-- mlflow
-- scikit-learn
-- requests
-- joblib
-- boto3
