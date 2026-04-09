@@ -16,6 +16,7 @@
 
 ## Project structure
 mlops-experiments/
+```
 ├── argocd/
 │ ├── application.yaml
 │ └── applications/
@@ -28,7 +29,7 @@ mlops-experiments/
 ├── best_model/
 │ └── best_model.pkl
 └── screenshots/
-
+```
 ---
 
 ##  ArgoCD Applications
